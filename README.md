@@ -1,2 +1,1 @@
-# learnMM
-MM learner
+# Materia Medica Quiz tool
