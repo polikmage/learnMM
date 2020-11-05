@@ -11,20 +11,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-public class SymListWriter {
-    private static Logger logger = LoggerFactory.getLogger(SymListWriter.class);
+public class ListFileWriter {
+    private static Logger logger = LoggerFactory.getLogger(ListFileWriter.class);
     Stack<String> symStack = new Stack<>();
     List<String> allSyms;
     int allSymsNumber;
     String pathToResultsDir;
     int counter = 0;
-    private static final String genSymDir = "\\generated-symptoms\\";
-    private static final String remResultDir = "\\remedies\\";
+    private static final String genSymDir = "generated-symptoms";
+    private static final String remResultDir = "remedies";
+    private static final String resultsDir="results";
     private static final String symFileName = "symptom-quiz-";
     private static final String remFileName = "remedy-list";
 
-    public SymListWriter(List<String> allSyms, String pathToResultsDir) {
-        this.pathToResultsDir = pathToResultsDir;
+    public ListFileWriter(List<String> allSyms) {
+        createDirs();
         this.symStack.addAll(allSyms);
         this.allSymsNumber = symStack.size();
         this.allSyms = allSyms;
@@ -36,13 +37,13 @@ public class SymListWriter {
 
         //abstraktni file objekt
         int increase = 1;
-        File file = new File(pathToResultsDir + genSymDir + symFileName + increase + ".txt");
+        File file = new File(pathToResultsDir +"\\"+ genSymDir +"\\"+ symFileName + increase + ".txt");
 
 
         //pokud existuje file s tou cestou na disku
         while (file.exists()) {
             increase++;
-            file = new File(pathToResultsDir + genSymDir + symFileName + increase + ".txt");
+            file = new File(pathToResultsDir +"\\"+ genSymDir +"\\"+ symFileName + increase + ".txt");
         }
         if (!file.exists()) {
             try {
@@ -83,7 +84,7 @@ public class SymListWriter {
     }
 
     private void deleteAllSymptomFiles() {
-        File dir = new File(pathToResultsDir + genSymDir);
+        File dir = new File(pathToResultsDir +"\\"+ genSymDir);
         for (File file : dir.listFiles())
             if (!file.isDirectory())
                 file.delete();
@@ -94,7 +95,7 @@ public class SymListWriter {
         for (File file : dir.listFiles())
             if (!file.isDirectory())
                 file.delete();*/
-        File file = new File(pathToResultsDir + remResultDir + remFileName + ".txt");
+        File file = new File(pathToResultsDir +"\\"+ remResultDir +"\\"+ remFileName + ".txt");
         file.delete();
     }
 
@@ -102,7 +103,7 @@ public class SymListWriter {
         deleteResultRemedyListFile();
         int lineNum = 0;
         //abstraktni file objekt
-        File file = new File(pathToResultsDir + remResultDir + remFileName + ".txt");
+        File file = new File(pathToResultsDir +"\\"+ remResultDir +"\\"+ remFileName + ".txt");
 
         //pokud neexistuje file s tou cestou na disku
         if (!file.exists()) {
@@ -131,4 +132,34 @@ public class SymListWriter {
         }
 
     }
+
+    private void createDirs(){
+        String currentDir = System.getProperty("user.dir");
+        pathToResultsDir = currentDir+"\\"+resultsDir;
+        File dirResults = new File(pathToResultsDir);
+        File dirGenSyms = new File(pathToResultsDir+"\\"+genSymDir);
+        File dirRemList = new File(pathToResultsDir+"\\"+ remResultDir);
+        if (!dirResults.exists()){
+            dirResults.mkdir();
+            // If you require it to make the entire directory path including parents,
+            // use directory.mkdirs(); here instead.
+        }
+        if (!dirGenSyms.exists()){
+            dirGenSyms.mkdir();
+            // If you require it to make the entire directory path including parents,
+            // use directory.mkdirs(); here instead.
+        }
+        if (!dirRemList.exists()){
+            dirRemList.mkdirs();
+            // If you require it to make the entire directory path including parents,
+            // use directory.mkdirs(); here instead.
+        }
+
+    }
+
+/*    public static void main(String[] args) throws IOException {
+        logger.info(new java.io.File( "." ).getCanonicalPath());
+        logger.info(System.getProperty("user.dir"));
+        logger.info(Paths.get(".").toAbsolutePath().normalize().toString());
+    }*/
 }
