@@ -1,5 +1,6 @@
-package org.mpo.homeopathy.symgen;
+package org.mpo.homeopathy.symgen.io;
 
+import org.mpo.homeopathy.symgen.model.Remedy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,7 @@ public class RemedyReader {
             suffix = "@"+remedyName+"@";
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
-                String line = s.next()+suffix;
+                String line = s.nextLine()+suffix;
                 //logger.info(line);
                 remedySymptoms.add(line);
             }

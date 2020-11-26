@@ -1,5 +1,7 @@
-package org.mpo.homeopathy.symgen;
+package org.mpo.homeopathy.symgen.gen;
 
+import org.mpo.homeopathy.symgen.model.Remedy;
+import org.mpo.homeopathy.symgen.io.RemedyReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,4 +52,7 @@ public class SymGenerator {
 
     }
 
+    public List<Remedy> getRemedies() {
+        return remedies;
+    }
 }

@@ -1,4 +1,4 @@
-package org.mpo.homeopathy.symgen;
+package org.mpo.homeopathy.symgen.model;
 
 import java.util.HashMap;
 import java.util.List;

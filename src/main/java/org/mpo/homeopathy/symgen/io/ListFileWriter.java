@@ -1,4 +1,4 @@
-package org.mpo.homeopathy.symgen;
+package org.mpo.homeopathy.symgen.io;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
+
+import static org.mpo.homeopathy.symgen.utils.Util.getRemedyName;
 
 public class ListFileWriter {
     private static Logger logger = LoggerFactory.getLogger(ListFileWriter.class);
@@ -114,10 +116,7 @@ public class ListFileWriter {
                 BufferedWriter bw = new BufferedWriter(fw);
                 Collections.reverse(allSyms);
                 for (int i = 0; i < allSyms.size(); i++) {
-                    String s = allSyms.get(i);
-                    s = s.substring(s.indexOf("@") + 1);
-                    s = s.substring(0, s.indexOf("@"));
-
+                    String s = getRemedyName(allSyms.get(i));
                     int lineNumber = ++lineNum;
                     bw.write(lineNumber + ". " + s);
                     bw.newLine();
@@ -132,6 +131,7 @@ public class ListFileWriter {
         }
 
     }
+
 
     private void createDirs(){
         String currentDir = System.getProperty("user.dir");
