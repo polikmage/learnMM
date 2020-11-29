@@ -10,10 +10,11 @@ import java.util.*;
 
 public class RemedyReader {
     private static Logger logger = LoggerFactory.getLogger(RemedyReader.class);
-    List<Remedy> remedies = new ArrayList<>();
+
 
 
     public List<Remedy> readAllRemedies(String pathToRemediesDir) throws FileNotFoundException {
+        List<Remedy> remedies = new ArrayList<>();
         File dir = new File(pathToRemediesDir);
         String remedyName;
         String suffix;
@@ -35,20 +36,21 @@ public class RemedyReader {
             remedies.add(new Remedy(mapOfSymptoms,remedyName));
 
         }
+        Collections.shuffle(remedies);
         return remedies;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    /*public static void main(String[] args) throws FileNotFoundException {
         RemedyReader remedyReader = new RemedyReader();
         remedyReader.readAllRemedies("C:\\Users\\marek.pola\\IdeaProjects\\LearnMM\\src\\main\\resources\\remedies");
         logger.info(remedyReader.remedies.toString());
-    }
+    }*/
 
-    public List<Remedy> getRemedies() {
+    /*public List<Remedy> getRemedies() {
         return remedies;
     }
 
     public void setRemedies(List<Remedy> remedies) {
         this.remedies = remedies;
-    }
+    }*/
 }

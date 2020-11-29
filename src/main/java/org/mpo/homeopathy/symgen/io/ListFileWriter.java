@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
@@ -28,7 +29,12 @@ public class ListFileWriter {
 
     public ListFileWriter(List<String> allSyms) {
         createDirs();
-        this.symStack.addAll(allSyms);
+
+        List<String> reversedSyms = new ArrayList<>();
+        reversedSyms.addAll(allSyms);
+        Collections.reverse(reversedSyms);
+
+        this.symStack.addAll(reversedSyms);
         this.allSymsNumber = symStack.size();
         this.allSyms = allSyms;
         deleteAllSymptomFiles();
@@ -114,7 +120,6 @@ public class ListFileWriter {
 
                 FileWriter fw = new FileWriter(file.getAbsoluteFile());
                 BufferedWriter bw = new BufferedWriter(fw);
-                Collections.reverse(allSyms);
                 for (int i = 0; i < allSyms.size(); i++) {
                     String s = getRemedyName(allSyms.get(i));
                     int lineNumber = ++lineNum;

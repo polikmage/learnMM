@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class QuizGame {
-    //TODO zkontrolovat generovani doplnkovych odpovedi, zprehlednit quiz, zobrazit spravny lek a ne pismeno, zkontrolovat generator symptomu, je tam prilis casto nat mur
-    // u remedy posibilities generovat mapu vcetne a,b,c,d
     QuizGenerator quizGenerator;
     List<Remedy> remedies;
     List<String> symptoms;
@@ -25,8 +23,7 @@ public class QuizGame {
     }
 
     public void runGame(){
-        //TODO pocet otazek volit na zacatku quizu a nebo ho ukoncit q
-        questions = quizGenerator.generateQuestions(100);
+        questions = quizGenerator.generateQuestions(symptoms.size());
         ConsoleView.showPreText();
         int counter = 0;
 

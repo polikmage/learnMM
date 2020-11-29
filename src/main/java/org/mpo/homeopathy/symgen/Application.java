@@ -40,9 +40,9 @@ public class Application {
 
         SymGenerator symGenerator = new SymGenerator(remedyPath);
         List<String> listOfSymptoms = symGenerator.generateListOfSymptoms();
-        /*ListFileWriter listFileWriter = new ListFileWriter(listOfSymptoms);
+        ListFileWriter listFileWriter = new ListFileWriter(listOfSymptoms);
         listFileWriter.writeSymptomsToFiles(num);
-        listFileWriter.writeRemediesListToFile();*/
+        listFileWriter.writeRemediesListToFile();
 
         QuizGame quizGame = new QuizGame(symGenerator.getRemedies(),listOfSymptoms);
         quizGame.runGame();
