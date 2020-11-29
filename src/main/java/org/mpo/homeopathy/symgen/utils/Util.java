@@ -9,7 +9,7 @@ public class Util {
         return s;
     }
 
-/*    public static String getOnlySymptom(String symptom){
-
-    }*/
+    public static String getOnlySymptom(String symptom){
+        return symptom.replaceAll("\\@.*?\\@", "");
+    }
 }

@@ -40,14 +40,11 @@ public class Application {
 
         SymGenerator symGenerator = new SymGenerator(remedyPath);
         List<String> listOfSymptoms = symGenerator.generateListOfSymptoms();
-        /*for (String s:listOfSymptoms) {
-            logger.info(s);
-        };*/
-        ListFileWriter listFileWriter = new ListFileWriter(listOfSymptoms);
+        /*ListFileWriter listFileWriter = new ListFileWriter(listOfSymptoms);
         listFileWriter.writeSymptomsToFiles(num);
-        listFileWriter.writeRemediesListToFile();
+        listFileWriter.writeRemediesListToFile();*/
 
         QuizGame quizGame = new QuizGame(symGenerator.getRemedies(),listOfSymptoms);
-        quizGame.runGame(20);
+        quizGame.runGame();
     }
 }

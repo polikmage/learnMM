@@ -6,16 +6,16 @@ import java.util.List;
 
 public class ConsoleView {
 
-    public static void showResultAnswer(Answer correctAnswer) {
+    public static void showResultAnswer(String correctAnswer) {
         printLnText("TREFA! Spravna odpoved je: "+correctAnswer);
     }
 
-    public static void showWrongAnswer(Answer correctAnswer) {
+    public static void showWrongAnswer(String correctAnswer) {
         printLnText("Chyba spravna odpoved byla: "+correctAnswer);
     }
 
     public enum Answer {
-        a(0), b(1), c(2), d(3);
+        a(0), b(1), c(2), d(3), e(4);
 
         private int value;
 
@@ -33,10 +33,12 @@ public class ConsoleView {
         }
     }
 
-    static final String liner = "*****************************************************";
+    static final String liner = "************************************************************************************************************";
 
     public static void showPreText() {
-        printLnText("Vitejte v Materia Medica quizu, ceka vas prirazovani 20 symptomu k 4 lekum kdz jeden a vice je spravnych");
+        printLnText(liner);
+        printLnText("Vitejte v Materia Medica quizu, ceka vas prirazovani symptomu k 5 lekum kdy jeden a vice je spravnych");
+
     }
 
     public static void showPostText(int correctAnswersNumber,int num) {
@@ -61,16 +63,17 @@ public class ConsoleView {
 
     private static Answer printAnswers(Question question) {
         List<String> remedies = question.getAllRemedies();
-        System.out.print(Answer.a + ": " + remedies.get(0) + ", ");
-        System.out.print(Answer.b + ": " + remedies.get(1) + ", ");
-        System.out.print(Answer.c + ": " + remedies.get(2) + ", ");
-        System.out.print(Answer.d + ": " + remedies.get(3) + ", \n");
+        for (int i = 0; i < remedies.size(); i++) {
+            System.out.print(Answer.enumFromInt(i) + ": " + remedies.get(i) + ", ");
+        }
+        System.out.println();
+
         int indexOfCorrectRemedy = remedies.indexOf(question.getCorrectRemedy());
         return Answer.enumFromInt(indexOfCorrectRemedy);
     }
 
 
     public static void showDescription() {
-        System.out.print("Zvol [a,b,c,d] a enter : ");
+        System.out.print("Zvol [a,b,c,d,e] a [q] pro ukonceni a enter : ");
     }
 }

@@ -13,8 +13,6 @@ public class SymGenerator {
     private String symptomClass = "keynotes";
     private List<Remedy> remedies;
     private RemedyReader remedyReader = new RemedyReader();
-
-
     private List<String> listOfSymptoms = new LinkedList<>();
 
     public SymGenerator(String pathToRemedies) throws FileNotFoundException {
@@ -22,33 +20,38 @@ public class SymGenerator {
     }
 
     public List<String> generateListOfSymptoms() {
-        Stack<String> randomizedSymptoms;
-        int highestNumberOfSymptomsInRemedy = 0;
-        List<Stack<String>> listOfStacks = new ArrayList<>();
-        List<Integer> numberOfRemedySymptoms = new ArrayList<>();
+        //Stack<String> randomizedSymptoms = new Stack<>();
+        //int highestNumberOfSymptomsInRemedy = 0;
+       // List<Stack<String>> listOfStacks = new ArrayList<>();
+        //List<Integer> numberOfRemedySymptoms = new ArrayList<>();
+        List<String> symptoms = new ArrayList<>();;
 
         for (Remedy remedy : remedies) {
-            List<String> symptoms = new ArrayList<>();
             symptoms.addAll(remedy.getSymptomMap().get(symptomClass));
-            Collections.shuffle(symptoms);
+/*            Collections.shuffle(symptoms);
             randomizedSymptoms = new Stack<>();
             randomizedSymptoms.addAll(symptoms);
-            /*for (String symptom : randomizedSymptoms) {
+            *//*for (String symptom : randomizedSymptoms) {
                 logger.info(symptom);
-            }*/
+            }*//*
             listOfStacks.add(randomizedSymptoms);
-            numberOfRemedySymptoms.add(symptoms.size());
+            numberOfRemedySymptoms.add(symptoms.size());*/
         }
-        highestNumberOfSymptomsInRemedy = Collections.max(numberOfRemedySymptoms);
-        for (int i = 0; i < highestNumberOfSymptomsInRemedy; i++) {
+        //highestNumberOfSymptomsInRemedy = Collections.max(numberOfRemedySymptoms);
+
+        Collections.shuffle(symptoms);
+        //randomizedSymptoms.addAll(symptoms);
+
+        /*for (int i = 0; i < highestNumberOfSymptomsInRemedy; i++) {
             for (Stack<String> s : listOfStacks) {
                 if (s.isEmpty()) {
                     continue;
                 }
                 listOfSymptoms.add(s.pop());
             }
-        }
-        return listOfSymptoms;
+        }*/
+
+        return symptoms;
 
     }
 

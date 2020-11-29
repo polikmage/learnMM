@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class QuizGame {
     //TODO zkontrolovat generovani doplnkovych odpovedi, zprehlednit quiz, zobrazit spravny lek a ne pismeno, zkontrolovat generator symptomu, je tam prilis casto nat mur
-
+    // u remedy posibilities generovat mapu vcetne a,b,c,d
     QuizGenerator quizGenerator;
     List<Remedy> remedies;
     List<String> symptoms;
@@ -24,26 +24,28 @@ public class QuizGame {
         this.quizGenerator = new QuizGenerator(remedies,symptoms);
     }
 
-    public void runGame(int numOfQuestions){
-        questions = quizGenerator.generateQuestions(numOfQuestions);
+    public void runGame(){
+        //TODO pocet otazek volit na zacatku quizu a nebo ho ukoncit q
+        questions = quizGenerator.generateQuestions(100);
         ConsoleView.showPreText();
+        int counter = 0;
 
         for (int i = 0; i < questions.size(); i++) {
-            ConsoleView.Answer correctAnswer= ConsoleView.showQuestion(questions.get(i),i);
+            Question currentQuestion = questions.get(i);
+            counter = i+1;
+            ConsoleView.Answer correctAnswer= ConsoleView.showQuestion(currentQuestion,counter);
             ConsoleView.showDescription();
             String key = readKey();
-            if(getResult(key,correctAnswer)){
-                ConsoleView.showResultAnswer(correctAnswer);
-            }else {
-                ConsoleView.showWrongAnswer(correctAnswer);
+            if(key.equals("q")){
+                break;
             }
-
-
-
-
+            if(getResult(key,correctAnswer)){
+                ConsoleView.showResultAnswer(currentQuestion.getCorrectRemedy());
+            }else {
+                ConsoleView.showWrongAnswer(currentQuestion.getCorrectRemedy());
+            }
         }
-
-        ConsoleView.showPostText(correctAnswersNumber,numOfQuestions);
+        ConsoleView.showPostText(correctAnswersNumber,counter);
     }
 
     private Boolean getResult(String key, ConsoleView.Answer answer) {

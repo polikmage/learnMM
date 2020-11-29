@@ -25,23 +25,45 @@ public class QuizGenerator {
         questions = new ArrayList<>();
         for (int i = 0; i < numberOfQuestions; i++) {
             String correctRemedy = Util.getRemedyName(symptoms.get(i));
-            Question question = new Question(symptoms.get(i).replaceAll("\\@.*?\\@", ""), generateRemedyPossibilities(correctRemedy), correctRemedy);
+            Question question = new Question(Util.getOnlySymptom(symptoms.get(i)), generateRemedyPossibilities(correctRemedy), correctRemedy);
             questions.add(question);
         }
         return questions;
     }
 
     private List<String> generateRemedyPossibilities(String correctRemedyName) {
-        Random random = new Random();
+        List<Integer> numList = new ArrayList<>();
+        List<String> remListWithoutCorrectOne = new ArrayList<>();
+        List<String> remList = new ArrayList<>();
+
+        for (int i=0; i<remedies.size(); i++) {
+            remListWithoutCorrectOne.add(remedies.get(i).getName());
+        }
+        remListWithoutCorrectOne.remove(correctRemedyName);
+
+        for (int i=0; i<remListWithoutCorrectOne.size(); i++) {
+            numList.add(i);
+        }
+
+        Collections.shuffle(numList);
+
+        for (int i=0; i<4; i++) {
+            int rNum = numList.get(i);
+            String rem = remListWithoutCorrectOne.get(rNum);
+            remList.add(rem);
+        }
+        remList.add(correctRemedyName);
+        Collections.shuffle(remList);
+
+        /*Random random = new Random();
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             int rnd = random.nextInt(remedies.size());
             list.add(remedies.get(rnd).getName());
         }
         list.add(correctRemedyName);
+        Collections.shuffle(list);*/
 
-        Collections.shuffle(list);
-
-        return list;
+        return remList;
     }
 }
