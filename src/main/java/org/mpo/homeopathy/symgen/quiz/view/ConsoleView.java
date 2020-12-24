@@ -42,14 +42,15 @@ public class ConsoleView {
     }
 
     public static void showPostText(int correctAnswersNumber,int num) {
-        printLnText("Vyborne vase skore je: "+ correctAnswersNumber +" z "+num);
+        printLnText("Výborně! Vaše skóre je: "+ correctAnswersNumber +" z "+num);
+        printLnText("Přejete si opakovat nesprávně zodpovězené otázky?[a/n]");
     }
 
 
-    public static Answer showQuestion(Question question, int i) {
+    public static Answer showQuestion(Question question, int i, int size) {
 
         printLnText(liner);
-        printLnText("Otazka cislo: " + i);
+        printLnText("Otazka cislo: " + i + " z " + size);
         printLnText(question.getSymptom());
         printLnText("Mozne odpovedi");
 
