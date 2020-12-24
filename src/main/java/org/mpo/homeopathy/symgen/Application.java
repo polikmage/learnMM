@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class Application {
-    //TODO vypsat celkovy pocet otazek, spatne zodpovezene otazky ulozit do seznamu a nabidnout projiti je znovu
+
     private static Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws IOException {
