@@ -1,7 +1,6 @@
 package org.mpo.homeopathy.symgen;
 
-import org.mpo.homeopathy.symgen.gen.SymGenerator;
-import org.mpo.homeopathy.symgen.model.Question;
+import org.mpo.homeopathy.symgen.gen.SymptomGenerator;
 import org.mpo.homeopathy.symgen.quiz.QuizGame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,7 @@ public class Application {
         if (args.length == 1) {
             remedyPath = args[0];
         } else {
-            remedyPath = userDir + "\\remedies3";
+            remedyPath = userDir + "/remedies4";
         }
         /*
         int num;
@@ -41,15 +40,15 @@ public class Application {
 
         //String remedyPath = userDir + "\\remedies";
 
-        SymGenerator symGenerator = new SymGenerator(remedyPath);
-        List<String> listOfSymptoms = symGenerator.generateListOfSymptoms();
+        SymptomGenerator symptomGenerator = new SymptomGenerator(remedyPath);
+        List<String> listOfSymptoms = symptomGenerator.generateListOfSymptoms();
         /*
         ListFileWriter listFileWriter = new ListFileWriter(listOfSymptoms);
         listFileWriter.writeSymptomsToFiles(num);
         listFileWriter.writeRemediesListToFile();
         */
 
-        QuizGame quizGame = new QuizGame(symGenerator.getRemedies(), listOfSymptoms);
+        QuizGame quizGame = new QuizGame(symptomGenerator.getRemedies(), listOfSymptoms);
         quizGame.runGame();
     }
 }

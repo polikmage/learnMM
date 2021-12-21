@@ -8,14 +8,14 @@ import org.slf4j.LoggerFactory;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class SymGenerator {
-    private static Logger logger = LoggerFactory.getLogger(SymGenerator.class);
+public class SymptomGenerator {
+    private static Logger logger = LoggerFactory.getLogger(SymptomGenerator.class);
     private String symptomClass = "keynotes";
     private List<Remedy> remedies;
     private RemedyReader remedyReader = new RemedyReader();
     private List<String> listOfSymptoms = new LinkedList<>();
 
-    public SymGenerator(String pathToRemedies) throws FileNotFoundException {
+    public SymptomGenerator(String pathToRemedies) throws FileNotFoundException {
         remedies = remedyReader.readAllRemedies(pathToRemedies);
     }
 
