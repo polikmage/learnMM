@@ -7,11 +7,11 @@ import java.util.List;
 public class ConsoleView {
 
     public static void showResultAnswer(String correctAnswer) {
-        printLnText("TREFA! Spravna odpoved je: "+correctAnswer);
+        printLnText("TREFA! Spravna odpoved je: " + correctAnswer);
     }
 
     public static void showWrongAnswer(String correctAnswer) {
-        printLnText("Chyba spravna odpoved byla: "+correctAnswer);
+        printLnText("Chyba spravna odpoved byla: " + correctAnswer);
     }
 
     public enum Answer {
@@ -41,8 +41,9 @@ public class ConsoleView {
 
     }
 
-    public static void showPostText(int correctAnswersNumber,int num) {
-        printLnText("Výborně! Vaše skóre je: "+ correctAnswersNumber +" z "+num);
+    public static void showPostText(int correctAnswersNumber, int num) {
+        System.out.println();
+        printLnText("Výborně! Vaše skóre je: " + correctAnswersNumber + " z " + num);
         printLnText("Přejete si opakovat nesprávně zodpovězené otázky?[a/n]");
     }
 
@@ -52,7 +53,7 @@ public class ConsoleView {
         printLnText(liner);
         printLnText("Otazka cislo: " + i + " z " + size);
         printLnText(question.getSymptom());
-        printLnText("Mozne odpovedi");
+        //printLnText("Mozne odpovedi");
 
         return printAnswers(question);
 
@@ -64,9 +65,15 @@ public class ConsoleView {
 
     private static Answer printAnswers(Question question) {
         List<String> remedies = question.getAllRemedies();
+        System.out.print("[");
         for (int i = 0; i < remedies.size(); i++) {
-            System.out.print(Answer.enumFromInt(i) + ": " + remedies.get(i) + ", ");
+            System.out.print(Answer.enumFromInt(i) + ": " + remedies.get(i));
+            if (i < remedies.size()-1){
+                System.out.print(", ");
+            }
+
         }
+        System.out.print("]");
         System.out.println();
 
         int indexOfCorrectRemedy = remedies.indexOf(question.getCorrectRemedy());

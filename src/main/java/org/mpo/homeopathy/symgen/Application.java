@@ -27,7 +27,7 @@ public class Application {
         if (args.length == 1) {
             remedyPath = args[0];
         } else {
-            remedyPath = userDir + "/remedies4";
+            remedyPath = userDir + "/remedies7";
         }
         /*
         int num;
